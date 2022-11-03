@@ -61,7 +61,18 @@ const submit = () => {
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </PrimaryButton>
+
+
+                
             </div>
         </form>
+<div class="text-center mt-4">
+    <a href="https://softko.net/">
+                        <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" >
+                        Github login
+                    </PrimaryButton>
+    </a>
+</div>
+
     </GuestLayout>
 </template>
