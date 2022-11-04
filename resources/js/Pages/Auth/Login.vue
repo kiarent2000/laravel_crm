@@ -34,13 +34,7 @@ const submit = () => {
             {{ status }}
         </div>
 
-        <div class="mt-4  login_ways mb-2">
-            <a href="/auth/github/redirect"><img src="../../../images/4725555-middle.png"><span>Github login</span></a>
-        </div>
-
-        <div class="text-center mt-2 mb-2  text-red-500">
-        {{ $page['props']['git_errors'] }}
-        </div>
+        
 
         <form @submit.prevent="submit">
             <div>
@@ -77,6 +71,36 @@ const submit = () => {
             </div>
         </form>
 
+        <div class="w-full sm:max-w-md mt-6 px-6 py-1 bg-slate-100 shadow-md overflow-hidden sm:rounded-lg">
+            <div class="mt-4  login_ways mb-2">
+            <a href="/auth/github/redirect"><img src="../../../images/4725555-middle.png"><span>Login with Google</span></a>
+            </div>
+
+            <div class="text-center mt-2 mb-2  text-red-500">
+            {{ $page['props']['git_errors'] }}
+            </div>
+        </div>
+
+
+        <div class="w-full sm:max-w-md mt-2 px-6 py-1 bg-slate-100 shadow-md overflow-hidden sm:rounded-lg">
+            <div class="mt-4  login_ways mb-2">
+            <a href="/auth/github/redirect"><img src="../../../images/4725555-middle.png"><span>Login with Facebook</span></a>
+            </div>
+
+            <div class="text-center mt-2 mb-2  text-red-500">
+            {{ $page['props']['git_errors'] }}
+            </div>
+        </div>
+
+        <div class="w-full sm:max-w-md mt-2 px-6 py-1 bg-slate-100 shadow-md overflow-hidden sm:rounded-lg">
+            <div class="mt-4  login_ways mb-2">
+            <a href="/auth/github/redirect"><img src="../../../images/4725555-middle.png"><span>Login with Github</span></a>
+            </div>
+
+            <div class="text-center mt-2 mb-2  text-red-500">
+            {{ $page['props']['git_errors'] }}
+            </div>
+        </div>
 
     </GuestLayout>
 </template>
