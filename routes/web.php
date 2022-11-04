@@ -29,7 +29,7 @@ Route::get('/auth/github/callback', function () {
 
    \Illuminate\Support\Facades\Auth::login($user);
 
-   return redirect('//dashboard');
+   return redirect('/dashboard');
 });
 
 
