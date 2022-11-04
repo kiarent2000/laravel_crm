@@ -25,7 +25,18 @@ Route::get('/auth/github/callback', function () {
  
    $user = \App\Models\User::where(['provider' => 'github','provider_id' => $socialiteUser->getId()])->first();
 
-   // dd($socialiteUser);
+   if(!$user)
+   {
+        $user = \App\Models\User::create([
+            'name' => $socialiteUser->getName(),
+            'email' => $socialiteUser->getEmail(),
+            'provider' => 'github',
+            'provider_id' => $socialiteUser->getId(),
+            'email_verified_at' => now(),
+
+        ]);
+
+   }
 
    \Illuminate\Support\Facades\Auth::login($user);
 
