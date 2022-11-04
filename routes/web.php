@@ -25,8 +25,11 @@ Route::get('/auth/github/callback', function () {
  
    $user = \App\Models\User::where(['provider' => 'github','provider_id' => $socialiteUser->getId()])->first();
 
+   // dd($socialiteUser);
+
    \Illuminate\Support\Facades\Auth::login($user);
 
+   return redirect('//dashboard');
 });
 
 
