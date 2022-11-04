@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +39,7 @@ Route::get('/auth/github/callback', function () {
    {
     $validator = \Illuminate\Support\Facades\Validator::make(
         ['email' => $socialiteUser->getEmail()],
-        ['email' => ['unique:users,email']],
-        ['email.unique' => 'Ошибка входа! Возможно вы уже входили на сайт с использованием друго метода авторизации']
+        ['email' => ['unique:users,email']],       
     );
     
     if($validator->fails())
@@ -50,7 +50,7 @@ Route::get('/auth/github/callback', function () {
     }
     
     
-    $user = \App\Models\User::create([
+    $user = User::create([
             'name' => $socialiteUser->getNickname(),
             'email' => $socialiteUser->getEmail(),
             'provider' => 'github',
@@ -61,7 +61,7 @@ Route::get('/auth/github/callback', function () {
 
    }
 
-   \Illuminate\Support\Facades\Auth::login($user);
+   Auth::login($user);
 
    return redirect('/dashboard');
 });
