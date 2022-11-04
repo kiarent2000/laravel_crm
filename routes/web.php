@@ -21,9 +21,12 @@ Route::get('/auth/github/redirect', function () {
 });
  
 Route::get('/auth/github/callback', function () {
-    $user = Socialite::driver('github')->user();
+   $socialiteUser = Socialite::driver('github')->user();
  
-    dd($user);
+   $user = \App\Models\User::where(['provider' => 'github','provider_id' => $socialiteUser->getId()])->first();
+
+   \Illuminate\Support\Facades\Auth::login($user);
+
 });
 
 
