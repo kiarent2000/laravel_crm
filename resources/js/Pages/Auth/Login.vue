@@ -67,7 +67,7 @@ const submit = () => {
             </div>
         </form>
 <div class="text-center mt-4">
-    <a href="https://softko.net/">
+    <a href="/auth/github/redirect">
                         <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" >
                         Github login
                     </PrimaryButton>
