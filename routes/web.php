@@ -43,8 +43,10 @@ Route::get('/auth/github/callback', function () {
     );
     
     if($validator->fails())
-    {
-        return redirect('/login')->withErrors($data);
+    {           
+        return Inertia::render('Auth/Login', [
+            'git_errors' => 'Ошибка входа! Возможно вы уже входили на сайт с использованием друго метода авторизации',
+        ]);
     }
     
     

@@ -10,14 +10,17 @@ import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 defineProps({
     canResetPassword: Boolean,
     status: String,
+
 });
 
-let test=777;
+
+
+//console.log(git_errors);
 
 const form = useForm({
     email: '',
     password: '',
-    remember: false
+    remember: false,
 });
 
 const submit = () => {
@@ -40,11 +43,12 @@ const submit = () => {
                                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" >
                                 Github login
                             </PrimaryButton>
-
             </a>
+<div class="text-center mt-2 mb-2  text-red-500">
+{{ $page['props']['git_errors'] }}
+</div>
 
-
-           {{ test }}
+    
 
 
         </div>
