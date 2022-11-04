@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,14 +23,33 @@ Route::get('/auth/github/redirect', function () {
 });
  
 Route::get('/auth/github/callback', function () {
-   $socialiteUser = Socialite::driver('github')->user();
+   
+   try 
+   {
+    $socialiteUser = Socialite::driver('github')->user();
+   } catch (\Exception $e) {
+    return redirect ('/login');
+   }
+
  
    $user = \App\Models\User::where(['provider' => 'github','provider_id' => $socialiteUser->getId()])->first();
 
    if(!$user)
    {
-        $user = \App\Models\User::create([
-            'name' => $socialiteUser->getName(),
+    $validator = \Illuminate\Support\Facades\Validator::make(
+        ['email' => $socialiteUser->getEmail()],
+        ['email' => ['unique:users,email']],
+        ['email.unique' => 'Ошибка входа! Возможно вы уже входили на сайт с использованием друго метода авторизации']
+    );
+    
+    if($validator->fails())
+    {
+        return redirect('/login')->withErrors($data);
+    }
+    
+    
+    $user = \App\Models\User::create([
+            'name' => $socialiteUser->getNickname(),
             'email' => $socialiteUser->getEmail(),
             'provider' => 'github',
             'provider_id' => $socialiteUser->getId(),

@@ -12,6 +12,8 @@ defineProps({
     status: String,
 });
 
+let test=777;
+
 const form = useForm({
     email: '',
     password: '',
@@ -33,6 +35,20 @@ const submit = () => {
             {{ status }}
         </div>
 
+        <div class="text-center mt-4">
+            <a href="/auth/github/redirect">
+                                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" >
+                                Github login
+                            </PrimaryButton>
+
+            </a>
+
+
+           {{ test }}
+
+
+        </div>
+
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="email" value="Email" />
@@ -50,6 +66,7 @@ const submit = () => {
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                  
                 </label>
             </div>
 
@@ -66,13 +83,7 @@ const submit = () => {
                 
             </div>
         </form>
-<div class="text-center mt-4">
-    <a href="/auth/github/redirect">
-                        <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" >
-                        Github login
-                    </PrimaryButton>
-    </a>
-</div>
+
 
     </GuestLayout>
 </template>
