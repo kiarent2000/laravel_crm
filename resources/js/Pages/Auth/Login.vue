@@ -37,6 +37,9 @@ const submit = () => {
         
 
         <form @submit.prevent="submit">
+        
+        
+        
             <div>
                 <InputLabel for="email" value="Email" />
                 <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
@@ -71,34 +74,27 @@ const submit = () => {
             </div>
         </form>
 
+        <div class="text-center mt-2 mb-2  text-red-500">
+            {{ $page['props']['log_errors'] }}
+        </div>
+
         <div class="w-full sm:max-w-md mt-6 px-6 py-1 bg-slate-100 shadow-md overflow-hidden sm:rounded-lg">
             <div class="mt-4  login_ways mb-2">
-            <a href="/auth/github/redirect"><img src="../../../images/4725555-middle.png"><span>Login with Google</span></a>
+            <a href="/auth/google/redirect"><img src="../../../images/4725555-middle.png"><span>Login with Google</span></a>
             </div>
 
-            <div class="text-center mt-2 mb-2  text-red-500">
-            {{ $page['props']['git_errors'] }}
-            </div>
         </div>
 
 
         <div class="w-full sm:max-w-md mt-2 px-6 py-1 bg-slate-100 shadow-md overflow-hidden sm:rounded-lg">
             <div class="mt-4  login_ways mb-2">
-            <a href="/auth/github/redirect"><img src="../../../images/4725555-middle.png"><span>Login with Facebook</span></a>
-            </div>
-
-            <div class="text-center mt-2 mb-2  text-red-500">
-            {{ $page['props']['git_errors'] }}
+            <a href="/auth/facebook/redirect"><img src="../../../images/4725555-middle.png"><span>Login with Facebook</span></a>
             </div>
         </div>
 
         <div class="w-full sm:max-w-md mt-2 px-6 py-1 bg-slate-100 shadow-md overflow-hidden sm:rounded-lg">
             <div class="mt-4  login_ways mb-2">
             <a href="/auth/github/redirect"><img src="../../../images/4725555-middle.png"><span>Login with Github</span></a>
-            </div>
-
-            <div class="text-center mt-2 mb-2  text-red-500">
-            {{ $page['props']['git_errors'] }}
             </div>
         </div>
 

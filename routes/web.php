@@ -19,21 +19,21 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/auth/github/redirect', function () {
-    return Socialite::driver('github')->redirect();
-});
+Route::get('/auth/{provider}/redirect', function ($provider) {
+    return Socialite::driver($provider)->redirect();
+})->where('provider', 'github|google|facebook');
  
-Route::get('/auth/github/callback', function () {
+Route::get('/auth/{provider}/callback', function ($provider) {
    
    try 
    {
-    $socialiteUser = Socialite::driver('github')->user();
+    $socialiteUser = Socialite::driver($provider)->user();
    } catch (\Exception $e) {
     return redirect ('/login');
    }
 
- 
-   $user = \App\Models\User::where(['provider' => 'github','provider_id' => $socialiteUser->getId()])->first();
+  
+   $user = \App\Models\User::where(['provider' => $provider,'provider_id' => $socialiteUser->getId()])->first();
 
    if(!$user)
    {
@@ -45,18 +45,24 @@ Route::get('/auth/github/callback', function () {
     if($validator->fails())
     {           
         return Inertia::render('Auth/Login', [
-            'git_errors' => 'Ошибка входа! Возможно вы уже входили на сайт с использованием друго метода авторизации',
+            'log_errors' => 'Login error! Mayby you have used another login method before?',
         ]);
     }
     
+    if(!$socialiteUser->getName())
+    {
+        $name=$socialiteUser->getNickname();
+    } else {
+        $name = $socialiteUser->getName();
+    }
+
     
     $user = User::create([
-            'name' => $socialiteUser->getNickname(),
+            'name' => $name,
             'email' => $socialiteUser->getEmail(),
-            'provider' => 'github',
+            'provider' => $provider,
             'provider_id' => $socialiteUser->getId(),
             'email_verified_at' => now(),
-
         ]);
 
    }
@@ -64,7 +70,7 @@ Route::get('/auth/github/callback', function () {
    Auth::login($user);
 
    return redirect('/dashboard');
-});
+})->where('provider', 'github|google|facebook');
 
 
 
