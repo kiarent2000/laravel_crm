@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class ServiceTestController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, PriceCalculateService $service)
     {
-       dd($request);
+       dd($service->plus($request->all()));
     }
 }

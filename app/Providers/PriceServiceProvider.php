@@ -13,7 +13,9 @@ class PriceServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(PriceCalculateService::class, function() {};)
+        $this->app->bind(PriceCalculateService::class, function($app) {
+            return new PriceCalculateService();
+        });
     }
 
     /**
