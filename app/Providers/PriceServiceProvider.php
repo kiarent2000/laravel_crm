@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\PriceCalculateService;
+
 
 class PriceServiceProvider extends ServiceProvider
 {
