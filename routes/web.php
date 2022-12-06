@@ -7,6 +7,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ServiceTestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/service_test', [ServiceTestController::class, "index"]);
+
 
 Route::get('/auth/{provider}/redirect', function ($provider) {
     return Socialite::driver($provider)->redirect();
@@ -71,6 +75,7 @@ Route::get('/auth/{provider}/callback', function ($provider) {
 
    return redirect('/dashboard');
 })->where('provider', 'github|google|facebook');
+
 
 
 
