@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace Tests\Feature\Auth;
 
 use App\Providers\RouteServiceProvider;
@@ -30,3 +30,4 @@ class RegistrationTest extends TestCase
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }
+*/
